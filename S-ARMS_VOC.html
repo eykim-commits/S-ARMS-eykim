@@ -405,16 +405,19 @@ const FAQ_DATA = [
       {
         q: "커먼서버, 프로젝트서버, 배치서버는 각각 뭐가 다른가요?",
         tag: "구조",
+        keywords: ["커먼서버 프로젝트서버 차이", "서버 종류", "서버 구조", "AR컨트롤서버", "커먼서버 배치서버 차이", "서버 뭐가 다름"],
         a: "커먼서버(10101)는 시스템 관리자 페이지로 상일동에서만 접속 가능하고 Admin 계정이 1개뿐입니다. 배포 시 전체 로그아웃이 발생하니 재로그인이 필요합니다. 프로젝트서버(9090)는 프로젝트 관리자 페이지로 사용자 정보를 보유하며 상일동과 각 사이트 내부망 모두에서 접속 가능하고, 배포해도 로그아웃되지 않습니다. 배치서버(=AR컨트롤서버)는 SCMS/FMCS 등 외부 원천에서 데이터를 받아오는 서버로, Model은 S-hub, Punch는 SCMS, NDE는 시멘트릭 DS/HARPA, Pipe는 FMCS, Support는 EDWP에서 데이터를 가져옵니다."
       },
       {
         q: "신규 유닛을 세팅할 때 어떤 순서로 진행하나요?",
         tag: "절차",
+        keywords: ["유닛 세팅 순서", "신규 유닛 개설", "프로젝트 유닛 오픈 절차", "유닛 세팅 절차", "유닛 신규 개설 방법"],
         a: "① 삼엔으로부터 유닛명·프로젝트ID·Name·경량화 서버 주소·플랏플랜 도면을 전달받습니다.\n② 경량화 서버(66.10.103.17)에서 유닛 세팅 → S-hub 세팅(삼인에 데일리 1회 요청) → 운영 배치서버(66.10.103.16)를 수동 실행해 S-hub FBX 번들을 생성·업로드 → 플랏플랜 세팅 → 데일리 업데이트 세팅정보 작성.\n③ 서버에서 유닛을 오픈하고 상일동에서 접속해 동작을 확인합니다.\n④ 문제가 없으면 세팅정보를 삼엔에 전달하고, 삼엔이 삼인에 데일리 업데이트를 요청합니다.\n⑤ 데일리가 완료되면 세팅된 유닛을 최종 확인합니다."
       },
       {
         q: "뷰마커를 추가하려면 어떻게 해야 하나요?",
         tag: "마커",
+        keywords: ["뷰마커 추가", "마커 추가 방법", "뷰마커 등록", "마커 제작 요청", "마커 추가 제작"],
         a: "실물 마커를 먼저 프린트한 뒤, 서버에서 해당 뷰마커 번호를 추가로 등록하고, 마지막으로 앱에서 DB를 삭제한 후 재다운로드하면 반영됩니다."
       }
     ]
@@ -426,26 +429,31 @@ const FAQ_DATA = [
       {
         q: "Auto update 중 분할압축 해제 오류가 나면 어떻게 하나요?",
         tag: "앱",
+        keywords: ["분할압축 오류", "압축 해제 오류", "unzip 오류", "오토 업데이트 오류", "앱 데이터 초기화"],
         a: "앱 메뉴에서 s-arms를 길게 눌러 설정으로 진입한 뒤 data를 삭제해 앱 데이터를 초기화하면 됩니다."
       },
       {
         q: "네트워크는 연결돼 있는데 로그인 화면 진입이 안 되거나 버전 체크가 계속 오래 걸려요.",
         tag: "앱",
+        keywords: ["로그인 화면 진입 안됨", "버전체크 오래 걸림", "version check 느림", "앱 진입 안됨", "로그인 화면 이동 불가", "프로젝트 셀렉트 뒤로가기 안됨"],
         a: "다음 순서로 시도해 보세요: ① 태블릿 재시작 ② 와이파이 껐다 재연결 ③ CB 초기화 ④ 앱 캐시 삭제. 네 가지를 모두 시도해도 해결되지 않으면 서버 상태를 확인해야 합니다."
       },
       {
         q: "도면 정합성 체크 후 재다운로드 버튼이 동작하지 않아요.",
         tag: "앱",
+        keywords: ["재다운로드 버튼 안됨", "정합성 체크 재다운로드 실패", "도면 재다운로드 안됨", "도면 재다운로드 동작안함"],
         a: "도면 재다운로드와 오토 업데이트가 동시에 진행되면 정상 동작하지 않습니다. 오토 업데이트가 완전히 끝난 뒤 도면 재다운로드를 시도하도록 안내하세요."
       },
       {
         q: "플랏플랜에서 도면 대신 파란 깍두기만 표시돼요.",
         tag: "앱",
+        keywords: ["플랏플랜 파란 깍두기", "깍두기만 표시", "플랏플랜 도면 안보임", "plot plan 깍두기", "플랏플랜 파일 안보임"],
         a: "먼저 DB를 삭제하고 재다운로드해 보세요. 그래도 해결되지 않으면 서버 파일명과 앱 파일명이 일치하는지 확인하고, 파일명이 같다면 최종 수정일(last date)을 비교해 원인을 좁혀갑니다."
       },
       {
         q: "마커 수퍼바이저 계정에 마커 권한이 반영되지 않아요.",
         tag: "앱",
+        keywords: ["마커 슈퍼바이저 권한", "마커 권한 안들어옴", "마커 권한 미반영", "마커 수퍼바이저 권한 없음"],
         a: "재로그인 후에도 반영되지 않으면 앱 DB를 삭제하고 재다운로드하도록 안내합니다."
       }
     ]
@@ -457,31 +465,37 @@ const FAQ_DATA = [
       {
         q: "UPV·S-HUB·S-ARMS 중 어디에는 있고 어디에는 없을 때, 원인을 어떻게 구분하나요?",
         tag: "핵심",
+        keywords: ["S-HUB에 모델이 없음", "shub 모델 없음", "shub 확인 방법", "UPV에는 있는데 S-HUB에 없음", "모델 존재 확인 방법", "UPV S-HUB S-ARMS 비교", "모델 어디까지 있는지 확인", "모델 누락 원인 확인", "S-HUB 모델 확인", "모델 있는지 확인하는 법"],
         a: "세 시스템의 존재 여부 조합으로 원인을 구분합니다.\n· UPV○ S-HUB○ S-ARMS○ → 정상, 대응 불필요.\n· UPV○ S-HUB× S-ARMS× → S-ARMS의 FBX No를 확인 후 UPV 시스템트리를 봅니다. SP3D 쪽 문제면 삼인 이슈(동기화 필요), Navisworks(NWD) 쪽 문제면 SE&A 이슈로 전달합니다.\n· UPV○ S-HUB○ S-ARMS× → 데이터 문제(Daily 미실행 또는 삼인 미처리)이므로 삼인 이슈로 SE&A에 전달합니다.\n· UPV× S-HUB× S-ARMS× → 애초에 형상이 없는 것이므로 SE&A에 내용만 전달합니다.\n모델 형상은 SWP3D→UPV→S-HUB→S-ARMS 순으로 만들어지고, 맵핑 데이터는 SWP3D→S-HUB→S-ARMS 순으로 흐릅니다."
       },
       {
         q: "모델에 조인트가 표시되지 않아요.",
         tag: "모델",
+        keywords: ["조인트 표시 안됨", "joint 안보임", "모델 조인트 없음", "조인트 미표시"],
         a: "삼엔-삼인에 모델 확인을 요청하고, 삼인 작업이 끝나면 S-hub에 정상적으로 표시되는지 먼저 확인합니다. S-hub가 업데이트된 뒤 FBX 데일리 업데이트를 기다리고, 1주일 이상 반영되지 않으면 삼엔-삼인에 재확인을 요청합니다."
       },
       {
         q: "탱크나 구조물 같은 일부 모델이 통째로 누락돼 있어요.",
         tag: "모델",
+        keywords: ["탱크 모델 누락", "구조물 모델 없음", "모델 통째로 없음", "모델 통째 누락"],
         a: "먼저 S-hub에 해당 모델이 있는지 확인하고, 없다면 UPV에서도 확인합니다. UPV·S-hub 업데이트를 기다린 뒤 FBX 데일리 업데이트까지 기다리며, 1주일 이상 반영되지 않으면 삼엔-삼인에 재확인을 요청합니다."
       },
       {
         q: "UPV나 S-Hub는 각각 어떻게 확인하나요?",
         tag: "확인방법",
+        keywords: ["UPV 보는 법", "S-HUB 보는 법", "shub 보는 법", "UPV 파일 다운로드", "S-HUB 접속 방법", "나비스웍스 확인", "cube portal", "shub 확인 방법", "UPV 확인 방법"],
         a: "UPV 확인: 나비스웍스를 열어 .exe 파일을 실행하고 .nwd 파일을 확인합니다 (고퀄리티 Windows 기반 프로그램). 다운로드는 cube portal 접속→프로님 계정으로 로그인→cube store에서 SWP3D 검색→project list에서 UPV file을 받으면 됩니다.\nS-HUB 확인: 경량화 배치서버(66.10.103.17, PW: SECL365$)에 접속해 \\\\66.10.103.16\\Shared Folder\\S-ARMS\\source\\project\\unit\\깍두기\\FBX 경로에서 FBX 단위로 열어 확인하거나, S-hub에 로그인해 systemtree에서 3dpart.system.equipment.abc 형식으로 검색합니다. [e]는 검색 객체로 이동, [h]는 하이라이트 단축키이며 except query 작업도 이 화면에서 진행합니다. S-hub는 경량화 모델용 웹 프로그램입니다."
       },
       {
         q: "현장 실물과 앱 화면의 모델이 다를 때는 어떻게 처리하나요?",
         tag: "불일치",
+        keywords: ["현장 모델 다름", "앱 모델 실물 다름", "모델 불일치", "실물과 앱 모델 차이"],
         a: "현장에 없는 모델이 앱에 있다면 삼인에 문의하거나 exception query를 진행합니다. 반대로 현장에 있는 모델이 앱에 없다면 삼엔-삼인에 전달해 확인을 요청합니다(NWD 누락 등이 원인일 수 있습니다)."
       },
       {
         q: "모델 리뷰 시 특정 구간에서 로딩이 오래 걸려요. 어떻게 처리하나요?",
         tag: "성능",
+        keywords: ["로딩 오래걸림", "모델 리뷰 느림", "FBX 로딩 지연", "모델 로딩 느림"],
         a: "먼저 로딩이 오래 걸리는 FBX No나 위치를 특정할 수 있는 태그(Item Name, Line No 등)를 확인합니다. 이후 삭제보다는 형상 유지를 우선해, 사용자에게 보이지 않는 내부 객체는 except query로 제거하고, 보이지만 겹치는 객체는 ERP에 연계돼 있으면 유지합니다. 그래도 용량이 크면 nwd 파일을 제외하고 진행하며, 완료 후 삭제·제외한 객체 정보를 SE&A에 전달합니다."
       }
     ]
@@ -493,31 +507,37 @@ const FAQ_DATA = [
       {
         q: "모델은 있는데 도면이 안 보여요.",
         tag: "도면",
+        keywords: ["도면 없음", "도면 안보임 모델있음", "x-log 동기화", "모델은있는데도면없음"],
         a: "start server의 파일이 end server로 동기화되지 않았을 가능성이 있으므로, 삼엔에 x-log 동기화 확인을 요청합니다."
       },
       {
         q: "도면은 있는데 모델이 안 보여요.",
         tag: "도면",
+        keywords: ["모델 없음 도면있음", "모델 업데이트 요청", "도면은있는데모델없음"],
         a: "유닛명과 FBX 번호를 먼저 확인한 뒤, 삼엔-삼인에 모델 업데이트 작업을 요청합니다."
       },
       {
         q: "플랏플랜 도면이 최신 버전으로 업데이트되지 않았어요.",
         tag: "도면",
+        keywords: ["플랏플랜 최신 아님", "플랏플랜 업데이트 안됨", "도면 구버전", "플랏플랜 도면 갱신 안됨"],
         a: "현재 도면 파일을 확인하고, 삼엔에 최신 도면 파일을 요청한 뒤 플랏플랜에서 도면을 교체합니다. 교체 후에는 현장에 앱 업데이트를 안내합니다."
       },
       {
         q: "도면 파일은 있는데 실행하면 안 열려요.",
         tag: "도면",
+        keywords: ["도면 안열림", "PDF 손상", "도면 파일 오류", "도면 실행 안됨"],
         a: "PDF 캐시 DB 파일이 손상됐는지 먼저 확인합니다. 손상된 경우 이전 날짜의 정상 DB 파일로 수동 롤백하고, 앱에서는 DB를 초기화한 뒤 재다운로드하도록 안내합니다."
       },
       {
         q: "서치바에 도면 번호를 입력해도 도면이 조회되지 않아요.",
         tag: "도면",
+        keywords: ["도면번호 검색 안됨", "서치바 조회 안됨", "EDWP 등록", "도면 번호 검색해도 안나옴"],
         a: "먼저 밴더사 데이터인지 확인하세요. 밴더사 도면이나 테스트패키지는 애초에 S-ARMS로 수집되지 않으므로 조회되지 않는 것이 정상입니다. 밴더사 데이터가 아니라면 EDWP에 등록된 도면만 조회되므로 등록 여부를 확인하고, EDWP에 등록했는데도 안 보이면 등록 화면을 전달받아 DB를 조회합니다."
       },
       {
         q: "일반 도면이 S-ARMS에 없는데 FMCS에는 있어요 / 두 시스템의 도면이 서로 달라요.",
         tag: "동기화",
+        keywords: ["ARMS FMCS 도면 다름", "도면 상이", "x-log 동기화 이슈", "도면이 서로 다름"],
         a: "x-log 동기화 이슈일 가능성이 높습니다. SE&A에 start server와 end server의 캡쳐 이미지를 함께 전달해 확인을 요청합니다."
       }
     ]
@@ -529,26 +549,31 @@ const FAQ_DATA = [
       {
         q: "태블릿에서 Punch issue 아이콘이 비활성화돼 있어요.",
         tag: "펀치",
+        keywords: ["펀치 아이콘 비활성화", "펀치 권한 없음", "punch close 안보임", "펀치 이슈 버튼 비활성화"],
         a: "SCMS에서 해당 계정에 Punch issue 권한이 있는지 확인해야 합니다(프로님들만 조회 가능). Punch close 버튼이 안 보이는 경우도 마찬가지로 SCMS의 Punch close 권한을 확인하며, issue는 불가하고 close만 가능한 케이스도 있을 수 있습니다. 참고로 2차 종결(is client 펀치)은 Client 또는 SE&A만 가능하고, S-ARMS 자체의 펀치 권한은 Punch read 권한입니다."
       },
       {
         q: "펀치 오토메일링을 받고 싶지 않다고 요청받았어요.",
         tag: "메일",
+        keywords: ["오토메일 그만", "메일링 해제", "펀치 메일 안받고 싶음", "오토메일링 중단"],
         a: "오토메일링은 SCMS에서 프로젝트/공종별로 Punch issue 권한을 가진 사람에게 자동 발송되는 구조입니다. S-ARMS에서 설정하는 펀치 권한과는 무관하므로, 메일을 받지 않으려면 SCMS에서 해당 공종의 Punch issue 권한을 삭제하도록 안내합니다."
       },
       {
         q: "오토메일링은 어떤 조건으로, 얼마나 자주 발송되나요?",
         tag: "메일",
+        keywords: ["오토메일링 조건", "메일 발송 주기", "자동메일 발송조건", "오토메일 발송기준"],
         a: "Punch issue/close는 S-ARMS 업로드 즉시 발송됩니다. Punch Issue/Close(Daily), Punch Sync(Daily), QC Visual Check(Weekly)는 SCMS에서 해당 공종 권한을 가진 전원에게 1일 1회 발송됩니다. daily user activity와 daily update는 시스템 관리자 페이지에 매니저로 등록됐거나 이메일이 수동 등록된 계정에 1일 1회 발송됩니다."
       },
       {
         q: "관리자 페이지에는 Send=Y로 표시되는데 SCMS M-import에는 펀치가 안 보여요.",
         tag: "펀치소실",
+        keywords: ["Send Y M-import 없음", "펀치 사라짐", "IF-009", "펀치 M-import 미표시"],
         a: "먼저 SCMS의 IF-009 인터페이스가 정상 처리됐는지, 그리고 SCMS의 Project No가 해당 프로젝트와 일치하는지 확인합니다(Admin>Project>Project Info). 그 외의 경우라면 SCMS에 메일로 문의해야 합니다. 참고로 ARMS는 SCMS 전송 성공 응답만 인식할 뿐 실패 사유는 수신하지 않으며, M-import 데이터 자체가 휘발성이라 SCMS 측에서도 사라진 펀치 정보는 추적이 불가능하다는 회신을 받은 이력이 있습니다."
       },
       {
         q: "특정 PKG에 등록한 펀치가 M-import 이후 SCMS에서 안 보여요.",
         tag: "펀치소실",
+        keywords: ["PKG 펀치 안보임", "중복 PKG", "펀치 소실", "패키지 펀치 안보임"],
         a: "SCMS의 punch view와 test package management 메뉴에서 PKG를 확인하고, 서버에서도 동일 PKG를 확인합니다. 동일한 이름의 PKG가 2개 존재하는 경우, SCMS에서 하나를 삭제하면서 거기 연결된 펀치 정보도 함께 사라진 것일 수 있습니다."
       }
     ]
@@ -560,16 +585,19 @@ const FAQ_DATA = [
       {
         q: "사용자 계정에 프로젝트 권한을 지급할 수 없어요.",
         tag: "계정",
+        keywords: ["계정 권한 지급 불가", "프로젝트 권한 없음", "로그인 이력 필요", "계정 권한 안됨"],
         a: "먼저 커먼서버 DB에서 해당 이메일 계정이 존재하는지 확인합니다. 계정 자체가 없다면, 사용자가 관리자 페이지 또는 S-ARMS 앱에 최소 1회 로그인한 이력이 있어야만 권한을 지급할 수 있다는 점을 안내합니다."
       },
       {
         q: "태블릿에서 펀치 이슈 원형 메뉴가 아예 보이지 않아요.",
         tag: "계정",
+        keywords: ["펀치 원형 메뉴 안보임", "펀치 메뉴 없음", "펀치 아이콘 자체가 없음"],
         a: "SCMS에서 해당 계정에 펀치 권한이 있는지 확인을 요청하고(프로님들만 가능), 필요하면 권한 변경 후 재등록을 요청합니다. 그래도 안 되면 서버 DB를 직접 확인해야 합니다."
       },
       {
         q: "도면이 조회되지 않거나 정합성 체크 버튼이 동작하지 않아요.",
         tag: "도면DB",
+        keywords: ["도면 DB 확인", "정합성 버튼 안됨", "도면 조회 자체가 안됨"],
         a: "이 경우는 도면 DB 자체를 확인해야 하는 케이스입니다."
       }
     ]
@@ -664,35 +692,76 @@ function buildSearchCorpus(){
   const corpus = [];
   FAQ_DATA.forEach(cat=>{
     cat.items.forEach(item=>{
+      const kw = item.keywords || [];
       corpus.push({
         type: 'faq',
         category: cat.label,
         tag: item.tag,
         title: item.q,
         body: item.a,
-        text: (item.q + ' ' + item.a).toLowerCase()
+        titleLower: item.q.toLowerCase(),
+        bodyLower: item.a.toLowerCase(),
+        kwLower: kw.join(' \u241f ').toLowerCase(), // joined with a separator that won't collide
+        compact: normalizeCompact(item.q + ' ' + item.a + ' ' + kw.join(' '))
       });
     });
   });
   return corpus;
 }
-const SEARCH_CORPUS = buildSearchCorpus();
 
+// strips spaces/hyphens/punctuation and lowercases, so "S-HUB" / "s hub" / "shub" all match
+function normalizeCompact(str){
+  return str.toLowerCase().replace(/[^a-z0-9가-힣]/g, '');
+}
+
+// common Korean particles (josa), longest first, stripped from the END of a token
+// so a query like "모델이" or "도면에서" reduces to its base form ("모델", "도면")
+// which is far more likely to appear verbatim inside the corpus text.
+const JOSA_LIST = [
+  "에서는","에게는","으로는","이라서","이라고","하고는",
+  "에서","에게","으로","까지","부터","이나","이랑","한테","에다","라서","라고",
+  "은","는","이","가","을","를","에","로","와","과","도","만","의","나"
+];
+function stripJosa(token){
+  for(const j of JOSA_LIST){
+    if(token.length > j.length + 1 && token.endsWith(j)){
+      return token.slice(0, -j.length);
+    }
+  }
+  return token;
+}
 
 function tokenize(str){
   return str.toLowerCase()
     .replace(/[^\p{L}\p{N}\s]/gu, ' ')
     .split(/\s+/)
+    .filter(t => t.length >= 2)
+    .map(stripJosa)
     .filter(t => t.length >= 2);
 }
 
-function scoreItem(item, rawQueryLower, tokens){
+const SEARCH_CORPUS = buildSearchCorpus();
+
+function scoreItem(item, rawLower, rawCompact, tokens){
   let score = 0;
-  if(rawQueryLower.length >= 2 && item.text.includes(rawQueryLower)) score += 14;
+
+  // Compact match (ignores hyphens/spaces/case) catches things like "shub" == "S-Hub"
+  if(rawCompact.length >= 2 && item.compact.includes(rawCompact)) score += 18;
+
+  // Exact phrase match, weighted by which field it lands in
+  if(rawLower.length >= 2){
+    if(item.kwLower.includes(rawLower)) score += 24;
+    if(item.titleLower.includes(rawLower)) score += 16;
+    if(item.bodyLower.includes(rawLower)) score += 5;
+  }
+
+  // Per-token overlap, same field weighting
   tokens.forEach(t=>{
-    if(item.text.includes(t)) score += 3;
+    if(item.kwLower.includes(t)) score += 8;
+    if(item.titleLower.includes(t)) score += 4;
+    if(item.bodyLower.includes(t)) score += 1.2;
   });
-  if(item.type === 'faq') score += 0.5; // curated answers ranked slightly higher on ties
+
   return score;
 }
 
@@ -704,6 +773,11 @@ function escapeHtml(s){
 searchBtn.addEventListener('click', runSearch);
 searchInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter') runSearch(); });
 
+// Minimum score to be considered a confident match. Below this, results are
+// too weak (single generic-word overlap) to be worth showing as an answer.
+const CONFIDENCE_THRESHOLD = 9;
+const MAX_RESULTS = 4;
+
 function runSearch(){
   const q = searchInput.value.trim();
   if(!q) return;
@@ -712,22 +786,22 @@ function runSearch(){
   resultQ.textContent = `"${q}"`;
 
   const rawLower = q.toLowerCase();
+  const rawCompact = normalizeCompact(q);
   const tokens = tokenize(q);
 
   const scored = SEARCH_CORPUS
-    .map(item => ({ item, score: scoreItem(item, rawLower, tokens) }))
-    .filter(s => s.score > 0)
+    .map(item => ({ item, score: scoreItem(item, rawLower, rawCompact, tokens) }))
     .sort((a,b) => b.score - a.score);
 
-  const top = scored.slice(0, 5);
+  const confident = scored.filter(s => s.score >= CONFIDENCE_THRESHOLD).slice(0, MAX_RESULTS);
 
-  if(top.length === 0){
-    resultBody.innerHTML = `일치하는 대응 이력을 찾지 못했습니다. 다른 키워드로 다시 검색하거나, 아래 탭에서 관련 카테고리를 직접 살펴봐 주세요.`;
+  if(confident.length === 0){
+    resultBody.innerHTML = `일치하는 답변을 찾지 못했습니다. 증상을 조금 더 구체적으로 입력해 보시거나(예: "도면 안 열려요", "펀치 권한 없어요"), 아래 탭에서 관련 카테고리를 직접 살펴봐 주세요.`;
     return;
   }
 
-  resultBody.innerHTML = top.map(({item}, idx) => `
-    <div style="margin-bottom:${idx < top.length-1 ? '18px' : '0'}; padding-bottom:${idx < top.length-1 ? '18px' : '0'}; border-bottom:${idx < top.length-1 ? '1px solid var(--line-soft)' : 'none'};">
+  resultBody.innerHTML = confident.map(({item}, idx) => `
+    <div style="margin-bottom:${idx < confident.length-1 ? '18px' : '0'}; padding-bottom:${idx < confident.length-1 ? '18px' : '0'}; border-bottom:${idx < confident.length-1 ? '1px solid var(--line-soft)' : 'none'};">
       <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px; flex-wrap:wrap;">
         <span style="font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--cyan); border:1px solid var(--cyan-dim); padding:2px 7px; border-radius:2px;">${escapeHtml(item.category)}</span>
         ${item.tag ? `<span style="font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--text-faint);">${escapeHtml(item.tag)}</span>` : ''}
