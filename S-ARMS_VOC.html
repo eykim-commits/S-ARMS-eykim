@@ -74,12 +74,23 @@
     0%,100%{ opacity:1; }
     50%{ opacity:.35; }
   }
-  h1{
+  .h1-btn{
+    display:block;
+    font-family:'IBM Plex Sans KR', sans-serif;
     font-size: 34px;
     font-weight:700;
-    margin: 0 0 8px;
     letter-spacing:-.01em;
+    margin: 0 0 8px;
+    padding: 0;
+    background: none;
+    border: none;
+    color: var(--text);
+    text-align: left;
+    cursor: pointer;
+    transition: color .15s ease;
   }
+  .h1-btn:hover{ color: var(--cyan); }
+  .h1-btn:active{ transform: translateY(1px); }
   .sub{
     color: var(--text-dim);
     font-size: 17px;
@@ -353,7 +364,7 @@
 
   @media (max-width: 560px){
     .wrap{ padding: 28px 14px 60px; }
-    h1{ font-size:22px; }
+    .h1-btn{ font-size:22px; }
     .search-row{ flex-direction:column; }
     .search-row button{ padding: 12px; }
   }
@@ -363,7 +374,7 @@
 <div class="wrap">
 
   <div class="sys-label"><span class="dot"></span>S-ARMS · KNOWLEDGE OPS CONSOLE</div>
-  <h1>S-ARMS VOC 대응 지식베이스</h1>
+  <button id="homeBtn" class="h1-btn">S-ARMS VOC 대응 지식베이스</button>
   <p class="sub">서버 구조, 모델·도면 동기화, 펀치 권한 등 축적된 대응 이력을 바탕으로 원인과 처리 방법을 안내합니다. 아래 검색창에 문의 내용을 자연어로 입력하세요.</p>
 
   <div class="console">
@@ -811,6 +822,17 @@ function runSearch(){
     </div>
   `).join('');
 }
+
+/* ================= Home button: reset to initial screen ================= */
+document.getElementById('homeBtn').addEventListener('click', ()=>{
+  searchInput.value = '';
+  resultBox.classList.remove('show');
+  resultBody.innerHTML = '';
+  activeTab = FAQ_DATA[0].id;
+  renderTabs();
+  renderFaq();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
 </script>
 </body>
