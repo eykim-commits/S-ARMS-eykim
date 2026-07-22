@@ -91,6 +91,13 @@
   }
   .h1-btn:hover{ color: var(--cyan); }
   .h1-btn:active{ transform: translateY(1px); }
+  .update-meta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--text-faint);
+    letter-spacing:.03em;
+    margin: 6px 0 16px;
+  }
   .sub{
     color: var(--text-dim);
     font-size: 17px;
@@ -400,6 +407,7 @@
 
   <div class="sys-label"><span class="dot"></span>S-ARMS · KNOWLEDGE OPS CONSOLE</div>
   <button id="homeBtn" class="h1-btn">S-ARMS VOC 대응 지식베이스</button>
+  <div class="update-meta" id="updateMeta"></div>
   <p class="sub">서버 구조, 모델·도면 동기화, 펀치 권한 등 축적된 대응 이력과 실제 VOC 사례 117건을 바탕으로 원인과 처리 방법을 안내합니다. 아래 검색창에 문의 내용을 자연어로 입력하세요.</p>
 
   <div class="console">
@@ -668,6 +676,19 @@ const VOC_DATA = JSON.parse(document.getElementById('vocDataJson').textContent |
       result: r.result
     });
   });
+})();
+
+// Update-info line: last time the underlying content was edited, and the
+// highest issue-tracker ID reflected so far (VOC_DATA is sorted id desc).
+const LAST_UPDATED = "2026-07-22";
+(function renderUpdateMeta(){
+  const el = document.getElementById('updateMeta');
+  if(!el) return;
+  const maxId = VOC_DATA.reduce((max, r) => {
+    const n = parseInt(r.id, 10);
+    return isNaN(n) ? max : Math.max(max, n);
+  }, 0);
+  el.textContent = `최종 업데이트일 ${LAST_UPDATED}  ·  최종 반영 데이터 Issue Report #${maxId}`;
 })();
 
 function renderTabs(){
