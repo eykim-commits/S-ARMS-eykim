@@ -293,6 +293,31 @@
     gap:8px;
     margin-top: 14px;
   }
+  .list-filter-bar{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+  .list-filter-bar input{
+    flex:1;
+    min-width:220px;
+    background: #0b1420;
+    border: 1px solid var(--line);
+    color: var(--text);
+    font-family:'IBM Plex Sans KR', sans-serif;
+    font-size: 16px;
+    padding: 10px 12px;
+    border-radius: 2px;
+    outline:none;
+  }
+  .list-filter-bar input:focus{ border-color: var(--cyan-dim); }
+  .list-filter-note{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--text-faint);
+    white-space:nowrap;
+  }
   .faq-item{
     background: var(--panel);
     border: 1px solid var(--line);
@@ -375,11 +400,11 @@
 
   <div class="sys-label"><span class="dot"></span>S-ARMS · KNOWLEDGE OPS CONSOLE</div>
   <button id="homeBtn" class="h1-btn">S-ARMS VOC 대응 지식베이스</button>
-  <p class="sub">서버 구조, 모델·도면 동기화, 펀치 권한 등 축적된 대응 이력을 바탕으로 원인과 처리 방법을 안내합니다. 아래 검색창에 문의 내용을 자연어로 입력하세요.</p>
+  <p class="sub">서버 구조, 모델·도면 동기화, 펀치 권한 등 축적된 대응 이력과 실제 VOC 사례 117건을 바탕으로 원인과 처리 방법을 안내합니다. 아래 검색창에 문의 내용을 자연어로 입력하세요.</p>
 
   <div class="console">
     <div class="console-inner">
-      <div class="console-top"><span class="tag">QUERY</span><span>입력하신 키워드를 FAQ에서 찾아 관련도가 높은 사례 순으로 보여드립니다</span></div>
+      <div class="console-top"><span class="tag">QUERY</span><span>입력하신 키워드를 FAQ와 실제 VOC 사례 117건에서 찾아 관련도가 높은 사례 순으로 보여드립니다</span></div>
       <div class="search-row">
         <input id="searchInput" type="text" placeholder="예: 태블릿에서 도면이 파란 깍두기로만 보여요" />
         <button id="searchBtn">문의하기</button>
@@ -405,6 +430,7 @@
   <footer>S-ARMS INTERNAL VOC KB · 학습 자료 기반 자동 응답이며 실제 조치 전 서버/DB 확인을 권장합니다</footer>
 </div>
 
+<script type="application/json" id="vocDataJson">[{"id": "3582", "site": "SAF", "status": "", "content": "한 개의 태블릿에서만 Punch close 버튼이 보이지 않음(다른 태블릿에는 표시)", "cause": "", "action": "해당 태블릿 로그인 계정이 SCMS에서 Punch close 권한을 받았는지 확인 안내", "result": "확인 안내 후 결과 미기재(진행중)"}, {"id": "3580", "site": "공통", "status": "해결된 이슈", "content": "'Daily User Activity' 오토메일링에서 QC Visual Check 실적 건수가 0으로 표시됨(관리자 페이지는 정상 카운팅)", "cause": "리포트 생성 시 날짜 범위 계산 방식과 QC 데이터 저장 방식이 불일치하여 User Activity 리포트 전체(VuMark, Capture, QPS, Support, Mailing 포함)가 0건으로 발송", "action": "서버 이슈 확인 후 배포", "result": "데이터 정상 확인 완료(2026-07-09)"}, {"id": "3579", "site": "FGIP_#1", "status": "해결된 이슈", "content": "FGIP PKG1, Train6에서 QC Visual Check data 검색 시 joint가 0개로 표시됨(Train 7,8은 정상)", "cause": "ERP data가 2026-07-01자 이후 최신화되지 않아 FMCS 최신 데이터가 반영되지 않음", "action": "ERP DB 업데이트", "result": "joint 갱신 확인 완료(2026-07-13)"}, {"id": "3578", "site": "공통", "status": "해결된 이슈", "content": "4차 S-ARMS APK 보안 검토 결과 취약점(SQLite DB 패스워드가 앱 코드 내 난독화 대칭키로 노출) 발견", "cause": "SQLite DB 패스워드를 난독화 대칭키 형태로 앱 코드에서 직접 관리하고 있어 보안 리스크 존재", "action": "난독화 패스워드를 서버에서 내려받는 방식으로 변경(앱 단에 키 비노출)", "result": "대응 완료 후 APK 전달"}, {"id": "3572", "site": "RLP", "status": "해결된 이슈", "content": "MOB 영역에서 플랏플랜과 3D 모델 모두 최신화가 안 되어 메인 빌딩 위치 등이 실제와 부정합", "cause": "확인 결과 최신 도면과 기존 도면이 실질적으로 일치(변경점 거의 없음)", "action": "플랏플랜 최신 버전으로 재업데이트", "result": "RLP MOB 플랏플랜 업데이트 완료, 현장에서 도면 조회 가능 확인(2026-07-07)"}, {"id": "3571", "site": "RLP", "status": "", "content": "한 달간 미사용한 태블릿이 초기화되어 S-ARMS 앱과 전용 와이파이 설정이 모두 삭제됨", "cause": "장기 미사용으로 인한 태블릿 자동 초기화", "action": "현장에서 재설치 안내", "result": "EMM 설치는 했으나 로그인이 되지 않는다는 추가 문의 발생, 연결 네트워크 확인 요청 후 회신 없어 미해결 상태"}, {"id": "3569", "site": "OGP", "status": "", "content": "M-Import에는 보이지 않는데 S-ARMS 관리 화면에서는 Send=Y로 표시되어 재업로드 불가", "cause": "SCMS 설정값 이상 추정, HTTP 400(Bad Request) 에러 발생", "action": "SCMS에 M-Import 미노출 원인 확인 요청, 배열 처리 형태 확인 요청", "result": "S-ARMS 서버는 200(정상) 처리되었으나 SCMS 측 추적 불가로 미해결(회신 대기 중)"}, {"id": "3568", "site": "FGIP_#1", "status": "", "content": "특정 zone(Train 6, 7) 사이트 로딩 시간이 오래 걸림", "cause": "Mesh가 잘게 쪼개져 있고 모든 Mesh를 런타임에 PhysX MeshCollider로 쿠킹하는 구조가 주원인(S-HUB에서 CAD 원본 그대로 파편화된 Mesh 출력)", "action": "3-1) 클라이언트 단에서는 근본 해결 어려워, 노출 모델 일부를 출력 제외(EXCEPT)하는 방식으로만 개선 가능함을 안내\n3-2) 향후 모델 리뷰 시 로딩 지연 구간을 특정할 FBX 번호/태그 정보를 사전에 확인하도록 프로세스 공유", "result": "구조적 한계로 근본 해결책 없이 안내 및 프로세스 개선으로 종료"}, {"id": "3564", "site": "RLP", "status": "종료된 이슈", "content": "특정 사용자 계정이 S-ARMS에 등록되지 않음", "cause": "로그인 이력은 있으나 해당 계정이 프로젝트에 할당되지 않은 상태", "action": "프로젝트 할당 처리", "result": "할당 확인 완료(2026-06-17)"}, {"id": "3563", "site": "OGP", "status": "종료된 이슈", "content": "앱에서 upload 완료한 Punch가 SCMS M-Import에 표시되지 않음", "cause": "OGP 프로젝트의 sARMS 연계 설정이 되어 있지 않음(담당자가 설정 변경한 것으로 추정)", "action": "메뉴 세팅 확인 요청", "result": "설정 변경 확인 및 문의자에게 해결 확인 받음"}, {"id": "3559", "site": "FGIP_#1", "status": "종료된 이슈", "content": "welding group에서 이미 Accept 처리한 joint가 앱에서는 NDE Reject로 표시됨", "cause": "FMCS와 ARMS 배치서버 DB 간 NDE 값 동기화 안됨(FMCS 최신값 AC, ARMS는 RJ)", "action": "SE&A에 동기화 확인 요청", "result": "NDE 데이터 정상 반영 완료(2026-07-01), AC 결과 확인 완료"}, {"id": "3554", "site": "공통", "status": "종료된 이슈", "content": "5/23(토)부터 ERP/FBX 데일리 업데이트가 돌지 않음", "cause": "S-Hub의 SP3D 동결(동기화) 작업과 데일리 업데이트가 병행 불가능한 구조", "action": "삼인 확인 요청, 3D 동기화 완료 대기(QC Visual Check Fit-Up 관련 일부 사이트는 수동 배치)", "result": "3D 동기화 완료 후 데일리 업데이트 정상 동작 확인(2026-06-19)"}, {"id": "3548", "site": "FGIP_공통", "status": "종료된 이슈", "content": "SCMS에서 ARMS로 전송되는 Punch Type list가 3차 데이터와 맞지 않음(Punch Type, update_dt, Manual_type, Del_Yn 등)", "cause": "파드힐리에 3차 SCMS가 아직 배포되지 않음", "action": "3차 SCMS 배포 일정 확인 요청", "result": "SCMS 운영 데이터 배포 진행됨(PKG#1, #4 Module Punch 수신 확인)"}, {"id": "3547", "site": "FGIP_#1", "status": "종료된 이슈", "content": "NDE Status가 Accepted 외 다른 값은 MiniMap에서 표시되지 않음", "cause": "", "action": "MiniMap 미표시 Tag 표시되도록 수정", "result": "수정 완료"}, {"id": "3546", "site": "FGIP_공통", "status": "종료된 이슈", "content": "joint data 매핑 시 FBX 경계면에 있는 joint가 다수의 DB를 매핑(동일 QC tag 중복 표시)", "cause": "joint data가 고유값이 아닌 항목으로 매핑되고 있었음", "action": "joint data를 고유값 기준 항목으로 매핑하도록 변경", "result": "수정 완료"}, {"id": "3545", "site": "FGIP_공통", "status": "종료된 이슈", "content": "Update 완료 후 프로젝트 재입장 시 DB를 다시 다운로드하는 문제(RFI 미사용 사이트에서도 발생)", "cause": "RFI 미사용 사이트도 데이터 수신 여부 검증 시 RFI 항목이 \"미수신\"으로 판정되어 매번 강제 업데이트", "action": "RFI 미사용 사이트는 검증 시 RFI 항목 제외", "result": "수정 완료"}, {"id": "3544", "site": "FGIP_#1", "status": "종료된 이슈", "content": "펀치 close 시 화면에 사진이 표시되지 않아 종료 확인이 불가능", "cause": "NULL 포인트 관련 이슈로 추정", "action": "방어 코드 추가", "result": "수정 후 3.0.9 버전 배포 완료"}, {"id": "3543", "site": "OGP", "status": "종료된 이슈", "content": "관리자 페이지에서 Send=Y인 Punch가 SCMS M-Import에 표시되지 않음(#3540과 동일 현상, OGP)", "cause": "#3540과 동일 원인", "action": "서버 수동 재전송, Send Disabled 제외 배포", "result": "#3563과 동일 이슈로 해결 처리(2026-06-04)"}, {"id": "3541", "site": "FGIP_#1", "status": "종료된 이슈", "content": "발주처 계정으로 펀치 이슈/종결이 불가능(시연 예정 건)", "cause": "DB 최신화 지연으로 펀치 이슈 권한이 반영되지 않은 상태", "action": "최신 DB로 업데이트", "result": "펀치 이슈/1차 종결 권한 발생 확인"}, {"id": "3540", "site": "RLP", "status": "종료된 이슈", "content": "관리자 페이지에서 Send=Y로 표시된 Punch가 SCMS M-Import에 나타나지 않고, Send Y 표시 때문에 재전송도 불가", "cause": "2차 앱 구조상 ARMS→SCMS 전송 성공 응답 수신 시에만 Send Y로 표시하며 실패 응답은 수신하지 않아, 성공 표시되어도 M-Import 미표시 원인 확인이 불가", "action": "서버에서 수동 재전송, 이후 응답 수신 여부와 무관하게 관리자 페이지에서 Send 가능하도록 처리(Send Disabled 제외 배포)", "result": "배포 완료 후 일부 롤백 협의, 재발 시 SCMS 메일 문의로 대응하기로 함(모니터링 지속)"}, {"id": "3511", "site": "FGIP_#1", "status": "종료된 이슈", "content": "서포트 도면(DA2S_DA2S-240X230-P)을 열면 내용이 표시되지 않음", "cause": "FMCS에서 해당 PDF가 빈 파일(내용 없음)로 등록됨", "action": "SE&A 확인 요청", "result": "FMCS 원본 자체가 빈 값임을 확인, 이슈 종료 처리"}, {"id": "3509", "site": "OGP", "status": "종료된 이슈", "content": "① Punch data 업데이트 실패 ② SCMS-ARMS Punch 상태 상이 ③ Minimap 검색 후 3D 위치 미표시 ④ Punch view 모드 Status/상세창 미표시 ⑤ Vumark 스캔 시 Punch details 미표시", "cause": "issuer 이름 암호화 수정 반영 시 update_dt가 일괄 갱신되며(OGP 820건) 서버 메모리 부족(OOM) 발생", "action": "서버 로직 수정 후 배포", "result": "현장 정상 동작 확인 완료"}, {"id": "3508", "site": "FGIP_#4", "status": "종료된 이슈", "content": "PKG4 Plot Plan PDF에 불필요 이미지 포함 및 로드 시간 2분 이상 소요", "cause": "모든 도면 명령이 단일 거대 콘텐츠 스트림에 인라인으로 포함되어 PDF.js가 캐싱 없이 처리해야 하는 구조", "action": "PDF 파일 객체 구조 정리 및 용량 최적화 후 재업로드", "result": "완료"}, {"id": "3507", "site": "FGIP_#4", "status": "종료된 이슈", "content": "2차→3차 앱 업데이트 후 다운로드 화면에서 다음 단계로 넘어가지 않음", "cause": "V3 업그레이드 데이터 리셋 조건에 3차 신규 RFI 카테고리 케이스가 고려되지 않음", "action": "데이터 리셋 조건을 \"glb 경로에 파일이 없을 때\"로 수정(v3.0.2)", "result": "수정 완료"}, {"id": "3506", "site": "RLP", "status": "종료된 이슈", "content": "관리자 페이지 Punch Sync 메뉴 사용 불가(SCMS M-Import에 없는 펀치를 태블릿에서 반복 입력해야 하는 문제)", "cause": "중복 업로드 방지를 위해 2차 앱의 Punch Sync 메뉴가 Punch Send로 명칭 변경됨", "action": "Punch Send 메뉴 사용 가이드 작성 및 배포", "result": "배포 완료"}, {"id": "3505", "site": "RLP", "status": "종료된 이슈", "content": "로그인 계속 실패(OTP 3회 발급)", "cause": "원인 특정 안됨(태블릿 시간 확인)", "action": "태블릿 시간 확인 요청", "result": "정상 작동 확인되어 해결 처리"}, {"id": "3484", "site": "RLP", "status": "종료된 이슈", "content": "테스트 패키지(035R1~041R1)에서 도면-3D 모델이 일치하지 않음", "cause": "DB 테이블과 실제 파일 경로 파일명 불일치, 최종적으로 밴더 도면으로 확인", "action": "ISO_DWG_NO 등 맵핑 정보 재확인 요청", "result": "밴더 도면으로 확인되어 SE&A 이슈 종료 확인"}, {"id": "3483", "site": "RLP", "status": "종료된 이슈", "content": "펀치 카테고리가 표시되지 않음", "cause": "업데이트 지연으로 추정", "action": "업데이트 재시도, 미해결 시 DB 삭제 후 재업데이트 안내", "result": "추가 문의사항 없어 종료 처리"}, {"id": "3481", "site": "RLP", "status": "종료된 이슈", "content": "태블릿 업데이트가 되지 않고 사용 불가하여 태블릿 정보(MAC/IP) 확인 요청", "cause": "EMM에서 S-ARMS 1차(구) 앱을 다운로드 시도하고 있었음", "action": "2차 앱 사용 안내", "result": "이후 별다른 문의 없음"}, {"id": "3478", "site": "RLP", "status": "종료된 이슈", "content": "(#3404 재등록) 펀치 데이터가 여전히 SCMS로 업로드되지 않는다는 VOC 재접수", "cause": "#3404(AWS 바레인 리전 장애)와 동일 건", "action": "신산하 프로가 현장과 직접 소통", "result": "현장에서 해결 전달받음"}, {"id": "3475", "site": "RLP", "status": "종료된 이슈", "content": "Punch issue 팝업에 package No.(10-900-02-H-TR-001)가 검색되지 않음", "cause": "FMCS 데이터를 SCMS가 제대로 가져오지 못해 ERP data에 pkg 정보 누락", "action": "SE&A 확인 요청", "result": "정상 조회 확인, 이후 유사 문제 시 SC7062_1/_5로 조회하도록 안내"}, {"id": "3469", "site": "FGIP_#4", "status": "종료된 이슈", "content": "신규 태블릿에 네트워크(전용 와이파이) 연결이 되지 않음", "cause": "중동 AP 권한 처리 미비", "action": "다른 태블릿과 동일 wifi 정보 입력 안내, 중동 AP 권한 처리 요청", "result": "전체 태블릿 세팅 요청 진행 후 완료"}, {"id": "3468", "site": "FGIP_#1", "status": "종료된 이슈", "content": "펀치 100개 업데이트 시도 중 20개만 성공(80개는 SCMS M-Import로 업로드 안됨)", "cause": "상세 원인 특정 안됨", "action": "업로드 실패한 펀치 ID 전달 요청", "result": "추가 문의 없어 종료 처리"}, {"id": "3467", "site": "FGIP_#1", "status": "종료된 이슈", "content": "펀치 오토 메일링에 사용자 이름이 특수문자로 표기됨", "cause": "#3461과 동일: SCMS scms_pchacr 데이터에 특수문자(암호화 값) 포함", "action": "SCMS에 update_dt 갱신 요청", "result": "복호화 데이터로 정상 확인 완료(2026-05-12)"}, {"id": "3466", "site": "FGIP_#4", "status": "", "content": "QC가 캡쳐 기능을 loop punch로 사용 가능한지 문의, 이후 SCMS Loop 연동/에러팝업 확인 필요 사항 발견", "cause": "loop 타입 펀치의 SCMS 데이터 연동 표현이 확인되지 않고, loop 탭 입장 시 에러 팝업 발생", "action": "품질서버에서 loop punch 테스트 진행, S-ARMS 업로드/Punch view 표시는 확인", "result": "SCMS 연동 미확인 항목은 추후 데이터 셋팅하기로 협의(미해결, 진행중)"}, {"id": "3464", "site": "FGIP_#1", "status": "종료된 이슈", "content": "Punch details 팝업에서 사진/도면/3D 캡쳐 이미지가 보이지 않음", "cause": "이미지 동기화 미실행", "action": "메인 화면 Data sync에서 system 등록 후 punch 동기화하여 이미지 다운로드 안내", "result": "추가 문의 없어 해결 처리"}, {"id": "3463", "site": "FGIP_#4", "status": "종료된 이슈", "content": "1개 태블릿에서 2명의 QC 로그인이 되지 않음", "cause": "태블릿 시간은 일치하여 원인 특정 어려움", "action": "네트워크 해제 후 앱 재실행 안내", "result": "접속 확인"}, {"id": "3462", "site": "RLP", "status": "종료된 이슈", "content": "유저 등록 시 사용자 목록에서 이름/이메일 조회가 되지 않음(가입은 완료된 상태)", "cause": "S-ARMS 시스템에 1회 이상 로그인 이력이 없어 목록에 노출되지 않음", "action": "로그인 후 사용자 등록 안내", "result": "추가 문의 없어 해결 처리"}, {"id": "3461", "site": "FGIP_#4", "status": "종료된 이슈", "content": "관리자 웹페이지에 사용자 이름이 특수문자로 표기됨", "cause": "GP API 응답값 중 일부 사용자 정보가 암호화된 값(\"$.AAH+...\")으로 내려와 S-ARMS가 그대로 저장/사용", "action": "SCMS에 update_dt 갱신 요청(암호화 데이터를 평문으로 재변환)", "result": "복호화 데이터로 정상 전달됨 확인 완료(2026-05-12)"}, {"id": "3445", "site": "RLP", "status": "종료된 이슈", "content": "system mode에서 객체 검색 시 하이라이트된 객체가 다른 객체와 겹쳐 보이는 현상 문의", "cause": "2차 앱의 그래픽 특성상 발생하는 현상", "action": "현상 설명 안내", "result": "향후 URP 적용 시 해소 예정으로 안내"}, {"id": "3434", "site": "RLP", "status": "종료된 이슈", "content": "도면 업데이트 실패(PDF 274개 파일 누락, 재로그인/DB 삭제해도 동일 증상)", "cause": "#3432와 동일: AWS 바레인 인프라 장애로 인한 파일 전송 데이터 누락 추정", "action": "누락 기간 파일 레코드 DB 수동 삭제 후 배치 재구동하여 재업데이트", "result": "업데이트 정상화 확인 완료(2026-04-14)"}, {"id": "3432", "site": "FGIP_#4", "status": "종료된 이슈", "content": "도면 파일 업데이트 실패(PDF 862개 파일 누락)", "cause": "배치 서버 로그상 전송 성공 기록이나, 해당 기간 바레인 지역 AWS 인프라 장애(전쟁 영향)로 파일 누락 추정", "action": "누락 기간 파일 레코드 DB 수동 삭제 후 배치 재구동하여 재업데이트", "result": "업데이트 정상화 확인 완료(2026-04-14)"}, {"id": "3426", "site": "FGIP_#1", "status": "종료된 이슈", "content": "test package no.가 DB와 앱에서 다르게 표시됨(AG여야 하는데 UG로 표시)", "cause": "배치 구동 시 SG7061의 변경된 IP 주소가 반영되지 않아 ERP 업로드 실패", "action": "IP 반영 수정 후 데일리 업데이트 재확인", "result": "ERP 업데이트 완료 확인"}, {"id": "3425", "site": "FGIP_공통", "status": "종료된 이슈", "content": "AWS 리전/IP 변경 후 FGIP 프로젝트 셀렉트가 불가능", "cause": "서버 쪽에서 리전 변경된 PKG#1, PKG#4의 IP가 잘못 입력됨", "action": "단계별 로그 확인(핑, check_project, 버전체크 로그 추가) 후 DB에서 IP 직접 수정", "result": "정상 진입 확인 완료"}, {"id": "3424", "site": "RLP", "status": "종료된 이슈", "content": "앱 로그인 시 로그인 실패 알림 출력(GP 검증 실패)", "cause": "GP(Global Portal)에서 공통 기능 배포 시 확인되지 않은 소스가 포함됨", "action": "GP 측에 JWT 검증 API 결과 확인 요청", "result": "GP에서 확인 후 이슈 해결 완료"}, {"id": "3415", "site": "RLP", "status": "종료된 이슈", "content": "태블릿에서 S-ARMS 앱이 열리지 않음(Samsung Account 로그아웃 발생)", "cause": "Samsung 계정 로그아웃", "action": "Forgot ID 선택 후 진행 안내", "result": "안내로 종료"}, {"id": "3404", "site": "RLP", "status": "종료된 이슈", "content": "다수 사용자로부터 펀치 데이터가 SCMS로 업로드되지 않는다는 VOC 접수", "cause": "AWS 바레인 리전 서버 장애로 마이그레이션 진행 중", "action": "서버 마이그레이션 및 IP 변경 진행", "result": "IP 변경 완료 후에도 업로드 불가 지속되어 신산하 프로가 현지 담당자와 직접 소통(이후 #3478로 이어짐)"}, {"id": "3396", "site": "공통", "status": "종료된 이슈", "content": "전쟁으로 인한 AWS 바레인 리전 장애로 서버 접속 불안정", "cause": "AWS 바레인 리전 이슈", "action": "AWS 싱가포르 리전으로 이전, 각 프로젝트 서버 IP 변경(RLP/FGIP#1/FGIP#4) 및 통신 재연결", "result": "IP 변경 후 서비스 재구동 완료(다만 이전 직후 FGIP 접속 불가 VOC 다수 발생하여 #3425 등으로 후속 처리)"}, {"id": "3358", "site": "FGIP_#4", "status": "종료된 이슈", "content": "데일리 업데이트에서 유사 에러 반복 발생", "cause": "PDF 캐시 DB 파일 내부 페이지 손상(integrity 실패), sqlite cipher4 모듈 사용 관련", "action": "① 정상 백업 파일로 수동 패치 ② DB open/close 시 integrity_check 실행하여 손상 감지 시 백업 복원·업로드 차단 ③ 트랜잭션 커밋 직후 WAL checkpoint 실행", "result": "AWS 장애 복구 후 배치서버 도면 장애 해결 확인 완료"}, {"id": "3346", "site": "FGIP_#1", "status": "종료된 이슈", "content": "FGIP#1 데일리 사용자 로그가 며칠째 0으로 표시됨", "cause": "실제 현장 사용량이 없었던 것으로 확인", "action": "현장 상황 확인", "result": "해결 처리"}, {"id": "3340", "site": "RLP", "status": "종료된 이슈", "content": "펀치 업로드 시 SCMS에서 package no.(10-830-02-H-DW-039)가 다르게 표시됨", "cause": "package no.가 없고 punch no.가 불완전한 상태의 펀치", "action": "SCMS 문의 안내", "result": "추가 문의 없어 해결 처리"}, {"id": "3339", "site": "RLP", "status": "종료된 이슈", "content": "데일리 업데이트에서 최신 업데이트 파일 일부 DB 동기화 실패 에러 발생", "cause": "기존 도면 정합성 작업 코드에 예외 처리가 부족(배치서버 패치 시 3차 개발 코드 혼입)", "action": "예외 처리 보완 및 경고 로그 추가", "result": "데일리 업데이트 정상 확인 완료(2026-03-25)"}, {"id": "3317", "site": "공통", "status": "종료된 이슈", "content": "URP(UG모드) 적용 화면 리뷰 중 바닥면에 도트 무늬 표시 및 투명도가 기존보다 진하게 표시되는 현상 발견", "cause": "URP 그래픽 쉐이더 스펙이 기존과 달라 발생(성능 개선을 위한 정상적인 표현 차이)", "action": "현재 상태 유지 또는 투명도 100% 변경 2가지 방안 검토", "result": "방안 검토 후 결정(상세 최종 결과 기재 없음)"}, {"id": "3311", "site": "FGIP_#1", "status": "종료된 이슈", "content": "도면 정합성 체크 후 파일 재다운로드 기능이 Fail", "cause": "PDF DB 손상(sqlite cipher4 암호화 모듈 이슈 및 배치 실행 후 서버 업로드 직전 강제 종료로 파일 누락), AWS 바레인 인프라 장애 영향", "action": "수동 파일 업로드, sqlite 관련 수정 진행, AWS 장애 복구 후 배치서버 재구동", "result": "해결됨 확인(2026-03-31)"}, {"id": "3264", "site": "RLP", "status": "해결된 이슈", "content": "ISBL Flare 도면(1155al-085)이 조회되지 않음(No data)", "cause": "배치서버 DB 조회 결과 파일은 정상 존재", "action": "DB 삭제 후 재다운로드 안내", "result": "추가 문의 없어 해결 처리"}, {"id": "3263", "site": "RLP", "status": "해결된 이슈", "content": "MOB TP GAC isometric 도면 및 FBX 1_74_29 영역 모델이 조회되지 않음", "cause": "정식 ISO가 아니어서 Drawing Server/System에 파일 자체가 없음(데이터·도면 미입력)", "action": "SE&A 확인 요청", "result": "데이터 미입력에 따른 정상 현상으로 종료 처리"}, {"id": "3262", "site": "FGIP_#1", "status": "종료된 이슈", "content": "데일리 리포트에 \"user name or password is incorrect\" 오류 출력(프로젝트 서버 네트워크 드라이브 인증 풀림)", "cause": "배치서버 재부팅 후 네트워크 드라이브 자격 증명이 풀림", "action": "네트워크 설정 재확인, 자격증명 재등록", "result": "데일리 업데이트 정상 진행 확인(2026-03-19)"}, {"id": "3237", "site": "RLP", "status": "종료된 이슈", "content": "프로젝트 정보 획득 실패 팝업 표시되며 접속 불가능", "cause": "PRJ_NO 이원화 관련 로직 반영 시 3차 빌드 일부가 서버에 포함되어 발생", "action": "즉시 조치", "result": "현장 정상화 확인"}, {"id": "3234", "site": "FGIP_공통", "status": "종료된 이슈", "content": "프로젝트 정보를 받아올 수 없다는 메시지 표시(로그인 안됨)", "cause": "PRJ_NO 이원화 관련 로직 반영 시 3차 빌드 일부가 포함되어 발생", "action": "즉시 조치", "result": "현장 정상화 확인"}, {"id": "3233", "site": "OGP", "status": "종료된 이슈", "content": "프로젝트 정보 획득 실패 팝업 표시되며 접속 불가(3개 디바이스, 네트워크 ON 상태에서만 발생)", "cause": "PRJ_NO 이원화 관련 로직 반영 시 3차 빌드 일부가 포함되어 발생", "action": "즉시 조치", "result": "현장 정상화 확인"}, {"id": "3228", "site": "공통", "status": "종료된 이슈", "content": "Auto Update에서 분할압축 파일 unzip 오류 시 대응 방법 문의", "cause": "", "action": "app 메뉴 > s-arms 길게 선택 > 설정 > data 삭제하여 앱 데이터 초기화 안내", "result": "안내로 해결"}, {"id": "3225", "site": "FGIP_#1", "status": "종료된 이슈", "content": "SG7061 FGIP#1에서 도면 정합성 체크 후 파일 재다운로드 기능이 동작하지 않음(재다운로드 실패 도면 21개)", "cause": "도면 재다운로드 팝업이 뜬 상태에서 오토업데이트가 동시에 진행되어 두 작업이 충돌", "action": "도면 DB/파일 자체는 문제 없음을 확인, 오토 업데이트 완료 후 재다운로드 재시도 요청", "result": "추가 문의 없어 해결 처리(2026-03-18)"}, {"id": "3224", "site": "공통", "status": "종료된 이슈", "content": "네트워크 연결 상태에서 Auto Update로 인한 앱 Version Check가 매우 오래 걸림(특정 태블릿에서만 발생)", "cause": "커먼서버 CPU 사용량 100%로 일시적 시스템 간 통신 오류 발생(#3223과 동일 원인)", "action": "① 태블릿 재시작 ② 와이파이 재연결 ③ DB 초기화 ④ 앱 캐시 삭제(모두 효과 없었음) ⑤ 커먼 서버 재시작", "result": "문제 해결 확인"}, {"id": "3223", "site": "공통", "status": "종료된 이슈", "content": "네트워크 연결 상태에서 GP 로그인 화면으로 이동 불가능(프로젝트 셀렉트 화면에서 뒤로가기도 불가, 특정 태블릿에서만 발생)", "cause": "커먼서버 CPU 사용량 100%로 일시적 시스템 간 통신 오류 발생", "action": "① 태블릿 재시작 ② 와이파이 재연결 ③ DB 초기화 ④ 앱 캐시 삭제(모두 효과 없었음) ⑤ 커먼 서버 재시작", "result": "문제 해결 확인"}, {"id": "3208", "site": "공통", "status": "종료된 이슈", "content": "특정 사용자 계정(Mr. Dong Bin Cha)이 S-ARMS 앱에 등록 불가능", "cause": "커먼서버 DB에 해당 이메일 계정이 확인되지 않음(로그인 이력 없음)", "action": "관리자 페이지 또는 앱에 1회 이상 로그인 이력이 있어야 권한 지급 가능함을 안내", "result": "추가 문의 없어 해결 처리"}, {"id": "3200", "site": "공통", "status": "종료된 이슈", "content": "Punch Sync 기본 조회 화면에서는 보이는 펀치가 Punch No.로 검색 시 조회되지 않음(No data 표시)", "cause": "S-ARMS Punch와 SCMS Punch를 pch_id 기준으로 매칭하여 일부 데이터가 검색되지 않음", "action": "시스템 간 공통 식별값(m_pch) 기준으로 매칭하도록 수정", "result": "프로젝트 서버 배포 완료"}, {"id": "3175", "site": "RLP", "status": "", "content": "Hydro PKG 3건 중 1건(10-160-03-H-P-006)이 M-Import 진행 후 SCMS에 등록되지 않음", "cause": "SCMS의 활성(유효) PKG 번호가 별도 존재하고, 2차 환경에는 del_yn이 없어 삭제된 구버전 PKG(SC7062_5001556)가 계속 사용되고 있었음", "action": "유효 PKG 번호 확인, update_dt 임의 갱신 검토했으나 추가 이슈 우려로 보류", "result": "미해결 상태로 이슈 계속 열어두는 것으로 협의(2026-05-27)"}, {"id": "3174", "site": "OGP", "status": "종료된 이슈", "content": "S-ARMS 데이터 동기화 관련 업데이트 실패(SCMS 통해 업로드된 펀치리스트 사진이 동기화되지 않음)", "cause": "명확한 원인 기재 없음(작업 중 안내)", "action": "2/7부터 업로드한 이미지는 정상 업데이트되도록 조치, 확인 필요한 이미지는 SCMS 재업로드 안내", "result": "추가 문의 없어 이슈 해결 처리"}, {"id": "3172", "site": "FGIP_#4", "status": "종료된 이슈", "content": "추가 개설한 Flare 유닛에 누락된 배관 라인이 있어 FBX 재작업 필요", "cause": "최초 FBX 영역 설정 시점에는 해당 위치에 모델이 존재하지 않았음", "action": "FBX 영역 재설정 진행 후 삼인에 데일리 세팅 재요청", "result": "데일리 업데이트에서 FBX 2,125개 출력 확인 완료(2026-03-28)"}, {"id": "3170", "site": "RLP", "status": "종료된 이슈", "content": "태블릿에서 펀치 이슈 원형 메뉴가 표시되지 않음", "cause": "해당 사용자가 SCMS에서 펀치 Close 권한만 받고 Issue 권한은 받지 않음", "action": "SCMS 펀치 권한 변경 후 재등록 안내", "result": "해결 완료, 권한 없는 경우 UI 표시 방식 개선은 신규 이슈(#3171)로 등록"}, {"id": "3169", "site": "RLP", "status": "종료된 이슈", "content": "S-ARMS에서 수동 입력한 펀치 업로드 시 M-Import에 표시되는 패키지 번호가 다르게 반영됨", "cause": "영상 확인 결과 S-ARMS와 m_pch_id가 다른 별개의 펀치가 M-Import에서 조회된 것으로 확인", "action": "전달받은 영상/데이터 상세 비교 분석", "result": "현상 원인 규명 후 안내(추가 조치 내역 없음)"}, {"id": "3168", "site": "RLP", "status": "종료된 이슈", "content": "캡쳐 기능 사용 후 Upload data 팝업에서 업로드 시 20분 이상 소요", "cause": "현장 네트워크 문제로 추정", "action": "다른 기기에서 동일 현상 확인 요청", "result": "다른 태블릿에서는 추가 문의 없음"}, {"id": "3167", "site": "RLP", "status": "종료된 이슈", "content": "Punch issue 시 Capture 화면 진입하면 흰 화면과 버튼만 출력됨", "cause": "앱을 재시작 없이 장시간 구동하여 발생한 메모리 이슈", "action": "앱 완전 종료 후 재시작 안내", "result": "현장에서 정상 동작 확인"}, {"id": "3147", "site": "FGIP", "status": "종료된 이슈", "content": "도면 정합성 체크 팝업의 버튼이 (영어 설정임에도) 한글로 표시됨", "cause": "#3143/#3146과 동일한 PDF 캐시 DB 파일 손상으로 팝업 로드시 에러 발생, 언어 처리 로직 미적용", "action": "DB 리셋", "result": "현장 정상 동작 확인"}, {"id": "3146", "site": "FGIP", "status": "종료된 이슈", "content": "Marked up P&ID 도면(d42-233-sow) 선택 시 도면이 조회되지 않음", "cause": "파드힐리1/4 PDF 캐시 DB 파일 손상(#3143과 동일 원인)", "action": "손상 DB 파일 이전 정상본으로 수동 롤백", "result": "DB 리셋 후 현장 정상 동작 확인"}, {"id": "3145", "site": "FGIP", "status": "종료된 이슈", "content": "도면 정합성 체크 버튼이 동작하지 않음", "cause": "#3143/#3146과 동일한 PDF 캐시 DB 파일 손상(다른 태블릿 재확인 시에도 동일 발생)", "action": "DB 리셋 후 재시도 안내", "result": "현장 정상 동작 확인"}, {"id": "3144", "site": "FGIP", "status": "종료된 이슈", "content": "Pressure test 모드 Punch issue 시 Description 입력/표시가 제대로 동작하지 않음", "cause": "#3143/#3146과 동일한 PDF 캐시 DB 파일 손상", "action": "DB 리셋", "result": "현장 정상 동작 확인"}, {"id": "3143", "site": "FGIP", "status": "종료된 이슈", "content": "RB-247961 도면 정보를 확인할 수 없음", "cause": "파드힐리1(3일간)/파드힐리4(5일간) PDF 업데이트 실패로 PDF 캐시 DB 파일이 손상됨(컨트롤 서버에서 파일이 열린 채로 유지되어 저장 실패)", "action": "손상된 PDF DB 파일을 이전 정상 DB 파일로 수동 롤백", "result": "DB 리셋 후 재시도 안내, 현장 정상 동작 확인"}, {"id": "3133", "site": "RLP", "status": "종료된 이슈", "content": "도면 검색 화면에서 도면번호(1400-FG-14077-30) 입력해도 도면이 조회되지 않음", "cause": "해당 패키지는 밴더사 데이터로 S-ARMS 유입 경로가 없어 조회 불가(EDWP 미등록 도면)", "action": "S-ARMS 도면 조회 체계(EDWP/ISO/PID/SUPPORT만 지원) 안내", "result": "정상 현상으로 확인, EDWP 등록 여부 재확인 안내"}, {"id": "3089", "site": "RLP", "status": "종료된 이슈", "content": "Furnace & Boiler 특정 FBX 로딩 시 최대 4분 47초 소요", "cause": "각 FBX 진입 시점에 데이터를 읽어오는 구조로 용량이 큰 FBX 진입 시 로딩 지연", "action": "메인 화면에서 Go to model 진입 전에 데이터를 미리 로드하도록 로직 변경", "result": "v0.0.3 테스트 완료, UI 재작업 후 비교 영상/소요시간표 작성 공유"}, {"id": "3088", "site": "RLP", "status": "종료된 이슈", "content": "Pressure test 모드에서 펀치 이슈 시 객체 정보가 맵핑되지 않고 도면/카테고리 정보도 맵핑되지 않음", "cause": "해당 패키지는 밴더사 데이터로 S-ARMS 유입 경로가 없어 조회 불가한 정상 현상", "action": "데이터 특성 설명 안내", "result": "정상 현상으로 확인, 안내 후 종료"}, {"id": "3064", "site": "FGIP", "status": "종료된 이슈", "content": "마커 슈퍼바이저로 등록한 계정에 마커 권한이 들어오지 않음", "cause": "", "action": "재로그인 및 DB 삭제 후 재다운로드 안내", "result": "해결 완료"}, {"id": "3027", "site": "FGIP", "status": "종료된 이슈", "content": "AGRUTrain 6 모델에 조인트가 표시되지 않음(Train 7,8은 정상)", "cause": "모델 출력 시 PI material이 제외되지 않고 출력됨(초기), S3D 라이선스 문제로 삼인 작업 지연", "action": "삼인/삼엔에 확인 및 라이선스 문제 해결 대기, FBX 데일리 업데이트 확인", "result": "FBX 상 조인트 추가 반영 확인 완료(2026-03-12)"}, {"id": "3024", "site": "FGIP", "status": "종료된 이슈", "content": "A-RMS에 삭제되었어야 할 테스트 펀치가 계속 노출됨", "cause": "SCMS에서만 데이터 삭제되고 ARMS DB에는 갱신되지 않음(del_yn 미처리 협의 방식)", "action": "ARMS DB에서 테스트 펀치 데이터 수동 삭제, 펀치 DB 재다운로드 매뉴얼 작성 및 배포", "result": "FGIP#1 616건, FGIP#4 75건 삭제 완료"}, {"id": "3023", "site": "FGIP", "status": "종료된 이슈", "content": "Punch issue 시 Item Group에 'None' 값이 검색되지 않음", "cause": "FMCS에서 동기화된 Test PKG의 Item Group ID가 중복되어 ARMS로 넘어가지 않음", "action": "조치 후 재확인", "result": "FGIP#1에서 None 값 검색 정상 확인 완료"}, {"id": "3022", "site": "RLP", "status": "종료된 이슈", "content": "도면 업데이트 시 에러가 발생하고 업데이트 실패 목록이 노출됨", "cause": "도면 업데이트 로직 변경으로 이전 버전 앱에서 발생, 최신 버전에서는 미발생", "action": "최신 버전 앱 배포", "result": "v2.4.23 버전 앱 현장 배포 완료"}, {"id": "3021", "site": "RLP", "status": "종료된 이슈", "content": "Punch Issue 시 Description 작성 후 Save 시 창이 닫히지 않는 버그", "cause": "버그(상세 원인 기재 없음)", "action": "버그 수정", "result": "S-ARMS v2.4.23 버전 앱 배포 완료"}, {"id": "3019", "site": "RLP", "status": "종료된 이슈", "content": "S-ARMS에서 발행한 18개의 Punch가 SCMS(M-Import)로 업로드되지 않음", "cause": "온라인 페이지에서 Send 값이 \"N\"으로 남아있던 항목", "action": "해당 18건 재전송 처리하여 M-Import 등록", "result": "등록 완료, Punch Sync 페이지 Send 기능 사용법 공유"}, {"id": "3011", "site": "RLP", "status": "종료된 이슈", "content": "S-ARMS에서 Punch를 업데이트했다고 했으나 Online/SCMS에서 확인 안됨", "cause": "현장 작업자가 Punch가 아닌 캡쳐 이미지를 업로드하고 있었음(기능 혼동)", "action": "온라인 페이지 튜토리얼 페이지 확인 요청 및 작업자 교육 전달", "result": "현장 프로님이 작업자에게 전달"}, {"id": "3002", "site": "OGP", "status": "종료된 이슈", "content": "도면 업데이트 중 진행 불가 오류/문제 다수 태블릿에서 발생", "cause": "서버 API 요청은 정상 처리되어 정확한 증상 원인 파악은 어려웠음", "action": "데이터(DB) 초기화 후 재다운로드 안내", "result": "초기화 후 정상 진행 확인"}, {"id": "2998", "site": "RLP", "status": "종료된 이슈", "content": "여러 개의 도면 파일이 다수 태블릿에서 업데이트/다운로드 실패", "cause": "도면 파일명 규칙 등 특정 원인 확정하지 못함", "action": "도면 파일 검사 후 문제 파일을 온라인/오프라인 상태에서 재다운로드하는 기능 추가", "result": "v2.4.23 버전 앱 현장 배포 완료"}, {"id": "2981", "site": "RLP", "status": "종료된 이슈", "content": "업데이트 후 서치바에서 다수의 테스트패키지/도면이 검색되지 않음", "cause": "2-1) ① Punch 관련 DB 구조 변경으로 인한 조회 문제\n2-2) ② 도면 DB 리스트는 있으나 실제 파일이 유효하지 않음", "action": "3-1) ① 조치 방법 안내로 해결\n3-2) ② 도면 파일 검사 및 재다운로드 기능, 배치서버 최신화 로직 수정", "result": "누락 없이 최신 도면 다운로드되는 것 확인 완료(2025-12-16)"}, {"id": "2980", "site": "RLP", "status": "종료된 이슈", "content": "3D 모델과 도면 불일치 확인 요청(패키지 10-550-01-H-P-022, 도면에는 Support 모델이 있으나 3D 모델에는 없음)", "cause": "모델 업데이트 및 도면 리비전 과정에서 해당 패키지/도면 자체가 ERP·FMCS에 더 이상 존재하지 않게 된 것으로 확인", "action": "유닛명/FBX 번호 확인, 삼인에 모델 업데이트 작업 요청, 상일동 방문하여 태블릿으로 재현 확인", "result": "해당 패키지 데이터가 ERP/FMCS 어디에도 없음을 확인, 도면 리비전에 따른 정상 변경으로 판단되어 종료"}, {"id": "2979", "site": "RLP", "status": "종료된 이슈", "content": "펀치 이슈했으나 SCMS(패키지 10-830-02-H-DW-028)에 펀치 데이터가 전혀 조회되지 않음", "cause": "M-import 재전송 필요 상황이었던 것으로 확인(누군가 삭제한 것은 아님)", "action": "온라인 페이지에서 재전송(Send) 처리", "result": "SCMS에서 재검색됨 확인, SCMS 삭제 펀치 확인 방법 몰라 발생한 유사 VOC도 있었음"}, {"id": "2958", "site": "RLP", "status": "종료된 이슈", "content": "펀치 이슈했으나 SCMS에서 동일 패키지 검색 시 펀치가 조회되지 않음", "cause": "SCMS에서 삭제된 펀치로 확인(삭제 펀치 조회 방법 미숙지)", "action": "SCMS에서 삭제된 펀치 확인하는 방법 안내", "result": "현장 재확인 진행"}, {"id": "2940", "site": "RLP", "status": "종료된 이슈", "content": "업로드한 펀치 이슈가 시스템에 표시되지 않음(Pressure test Punch Type 추가 관련 문의)", "cause": "RLP 스케줄러는 정상 작동 확인", "action": "SCMS 페이지에서 해당 이슈어로 업로드된 펀치 존재 확인, 담당자 재확인 요청", "result": "확인 요청 후 종료"}, {"id": "2939", "site": "RLP", "status": "종료된 이슈", "content": "Test Package 검색 시 Joint가 있는 일부 Pipe 모델이 Package로 바인딩되지 않음", "cause": "FMCS의 RLP PJT_NO가 SC7062_1/SC7062_5로 이원화되어 단일 PJT_NO 기준 매핑 로직과 불일치", "action": "3차 개발로 복수 PJT_NO 일괄 처리(배치/프로젝트 서버) 개발", "result": "배치 서버 운영 배포 완료, 미매핑 스풀 바인딩 확인"}, {"id": "2938", "site": "RLP", "status": "종료된 이슈", "content": "동일한 도면 파일(SPS-10-6423 등)이 여러 기기에서 업데이트/다운로드 실패", "cause": "DISPLAY_NAME 규칙 문제 등으로 추정되었으나 명확한 원인 특정 실패", "action": "도면 파일 검사 후 문제 파일 재다운로드 기능 개발", "result": "v2.4.23 버전 앱 현장 배포 완료"}, {"id": "2937", "site": "RLP", "status": "종료된 이슈", "content": "UPV에 존재하지 않는 모델이 FBX(4_46_8)에 함께 표시됨", "cause": "모델 예외처리 미적용", "action": "UPV에 없는 모델 출력 제외 예외처리", "result": "RLP 데일리 업데이트 및 모델 예외처리 반영 완료"}, {"id": "2922", "site": "RLP", "status": "종료된 이슈", "content": "Test Package 검색 시 서포트 모델만 선택되고 다른 모델은 표시되지 않음(장기 이슈, 유사 사례 다수)", "cause": "모델에 Pipeline(iso_dwg_no) 정보만 있고 PipeSpool(spool_no) 정보가 없어 데이터 맵핑 조건 미충족", "action": "3차 개발 항목으로 맵핑 조건 개선(도면에 조회되는 패키지가 1개인 경우만 맵핑)", "result": "배치서버 운영 배포 완료, 유닛별 스풀 바인딩 확인 진행"}, {"id": "2921", "site": "RLP", "status": "종료된 이슈", "content": "View Mode System에서 FBX 이동 시 하이라이트가 표시되지 않는 버그", "cause": "버그(상세 원인 기재 없음)", "action": "버그 수정", "result": "사이트 배포 완료"}, {"id": "2920", "site": "RLP", "status": "종료된 이슈", "content": "Cooling tower & Caustic 유닛에서 플랏플랜 이용 시 도면은 표시되지 않고 파란 깍두기만 표시됨", "cause": "명시적 원인 기재 없음(도면 DB/파일 이슈로 추정)", "action": "DB 초기화 후 재다운로드 안내", "result": "정상 동작 확인(2025-10-17)"}, {"id": "2914", "site": "RLP", "status": "종료된 이슈", "content": "S-ARMS 앱 상 NDE data가 모두 Reject로 표시되어 개수 확인 요청", "cause": "FMCS의 RLP PJT_NO가 SC7062_1/SC7062_5로 이원화되어 symmetricDS 동기화 문제 발생", "action": "3차 개발 항목으로 복수 PJT_NO 일괄 처리 개발, 배치서버 배포", "result": "반영 후 joint 개수 증가 확인(98,832→99,193개)"}, {"id": "2910", "site": "RLP", "status": "종료된 이슈", "content": "RLP 일부 디바이스 로그인 실패", "cause": "EMM 설치 요청 상태 대기 지속(네트워크 지연으로 다운로드 실패 추정)", "action": "정책 새로고침(재다운로드) 가이드 안내", "result": "서버/디바이스 시간 일치 후 정상 확인"}, {"id": "2909", "site": "RLP", "status": "종료된 이슈", "content": "PDF 도면은 검색되나 파일 내용이 보이지 않는 RLP 도면 조회 오류", "cause": "DB에는 도면 리스트가 있으나 실제 파일을 불러오지 못하는 현상(파일 손상)", "action": "hashcode 기준 깨진 파일 검증 후 전체/개별 도면 재다운로드 기능 개발", "result": "v2.4.23 버전 앱 현장 배포 완료(2025-12-19)"}, {"id": "2903", "site": "OGP", "status": "종료된 이슈", "content": "OGP Prosess FBX 2_29_8, 2_28_8 3D 모델(E-1854, E-1855)이 현장과 다르게 표시(foundation만 보임)", "cause": "UPV에는 존재하나 S-Hub에는 모델이 누락된 상태", "action": "SE&A/삼인에 확인 요청", "result": "S-Hub 상 모델 추가 반영 확인 완료(2025-10-17)"}, {"id": "2902", "site": "RLP", "status": "종료된 이슈", "content": "Furnace & Boiler Unit에서 FBX 로딩 시간 지연 발생", "cause": "해당 FBX 주변 고용량 파일 및 복잡한 구조물로 인한 폴리곤 과다", "action": "불필요 모델(자동차, 크레인, 발판, 사람 형상 등) 수동 삭제, Unity6/URP 업그레이드로 성능개선 추진(3차 개발)", "result": "보일러 내부 및 주변 불필요 객체 정리 완료(2025-11-07), 정리 체크리스트 프로세스화 예정"}, {"id": "2898", "site": "Jafurah", "status": "종료된 이슈", "content": "Jafurah 스케줄러 동기화 실패(fileattachList 처리 실패, punchList는 정상)", "cause": "첨부파일 레코드 수(1,136,760건) 과다로 인한 조회 성능 저하", "action": "name NULL 레코드 삭제 처리(백업 후), 전체 펀치 update_dt 갱신", "result": "업데이트 완료, 이후 발생한 이미지 스케줄러 반복 이슈는 별도 이슈(#3081)로 분리"}, {"id": "2894", "site": "OGP", "status": "종료된 이슈", "content": "PIP 담당자가 배관 관련 Auto mailing이 일부만 수신된다는 문의(RLP/OGP 공통)", "cause": "2-1) ① 9/23 이전: RLP 현장 펀치 update_dt와 서버 시간이 상이해 일부만 발송\n2-2) ② 9/26: 메일링 html 컨텐츠 특수문자 치환 오류로 발송 실패", "action": "3-1) ① SCMS에서 update_dt 갱신\n3-2) ② html 특수문자 처리 로직 수정 후 서버 배포", "result": "원인별 조치 완료, 재발 시 신규 이슈 등록 안내"}, {"id": "2887", "site": "Jafurah", "status": "종료된 이슈", "content": "자푸라 현장에서 프로젝트 정보를 받아오지 못함(오류 팝업)", "cause": "서버 작동 오류", "action": "서버 정상 작동시킴", "result": "문제 해결"}, {"id": "2886", "site": "OGP", "status": "종료된 이슈", "content": "OGP Punch 스케줄러 멈춤 발생(2025-09-18 23:20 UTC)", "cause": "IF-005 인터페이스 응답 중 fileattachList 처리 시 DB 파일정보 조회가 지연되어 스케줄러 정지", "action": "DB 파일 정보 조회 쿼리에 index 추가", "result": "정상 처리 확인, 사전 예방 차원의 서버 배포 진행"}, {"id": "2879", "site": "RLP", "status": "종료된 이슈", "content": "SCMS에서 update_dt를 올린 Punch 항목이 ARMS에 정상 업데이트되는지 확인 필요(일부 미반영)", "cause": "update_dt가 사이트 현지 시간 기준으로 설정되어 있지 않았음", "action": "SCMS에서 Jafurah/RLP 현지 시간 기준으로 update_dt 재설정 및 전체 갱신", "result": "갱신 완료, Punch 상태(Status) 표시 상이 문제는 별도 이슈로 분리"}, {"id": "2876", "site": "RLP", "status": "종료된 이슈", "content": "펀치 이슈 시 도면(SC7062-EH0D-ISO-10-1121PN-044) 열람이 되지 않음", "cause": "배치 서버 상 도면 업데이트는 되어 있었으나 앱에서 파일이 깨져 열람 불가", "action": "hashcode 및 파일 용량 기준으로 깨진 파일 강제 삭제 후 재다운로드 기능 추가", "result": "재다운로드 시 시간이 오래 걸리는 문제는 공종별 다운로드 적용 시점에 함께 해결 예정"}, {"id": "2873", "site": "OGP", "status": "종료된 이슈", "content": "OGP Unit Process NWD PU8100 Flare 영역이 모델에 증강되지 않음", "cause": "모델 재단(깍두기) 시 존재하지 않았던 물체로, 재작업 필요", "action": "철탑 부분만 별도 Flare Stack 유닛으로 신규 생성, S-Hub 셋업 및 데일리 업데이트 반영", "result": "Flare Stack 유닛 개설 및 적용 확인 완료(2025-10-23)"}, {"id": "2872", "site": "OGP", "status": "종료된 이슈", "content": "OGP에서 NDE_RESULT가 Rejected로 잘못 표시됨", "cause": "FMCS와 ARMS 간 데이터 상이(초기), 이후 주변 AC Joint 노출을 잘못 판단한 것으로 확인", "action": "FMCS-ARMS 인터페이스 데이터 전송 재확인", "result": "오인으로 확인, 그 외 NDE 정합성 문제는 별도 이슈로 관리"}, {"id": "2866", "site": "OGP", "status": "종료된 이슈", "content": "S-ARMS로 이슈한 Punch 중 일부가 Sync 되지 않아 누락 발생(OGP)", "cause": "명확한 단일 원인보다 Punch Sync 판단 조건/관리자 페이지 구조 문제로 파악", "action": "3-1) SCMS와 회의 진행(삭제된 펀치 샘플 확인)\n3-2) 관리자 페이지 개선: Punch Send 페이지·Punch Overall 페이지 신설, Punch Sync 판단 조건 변경\n3-3) 수정 배포 후 Send 횟수 제한 기능은 현장 문의 다수로 롤백", "result": "일부 수정 배포 완료, 잔여 항목은 3차 개발 항목(#3078, #3079)으로 분리"}, {"id": "2864", "site": "OGP", "status": "종료된 이슈", "content": "OGP Prosess FBX 2_29_10 3D 모델이 현장 모델과 다르게 표시됨", "cause": "S-HUB에는 모델이 반영되어 있었으나 FBX 파일 추출 시 누락됨", "action": "삼인에 FBX 파일 재확인 및 재출력, 우선 동기화 요청", "result": "누락된 모델 추가 완료(9/24 업데이트 반영)"}]</script>
 <script>
 
 /* ================= FAQ data grouped by tab ================= */
@@ -612,6 +638,12 @@ const FAQ_DATA = [
         a: "이 경우는 도면 DB 자체를 확인해야 하는 케이스입니다."
       }
     ]
+  },
+  {
+    id: "voc",
+    label: "실제 VOC 사례",
+    isVoc: true,
+    items: []
   }
 ];
 
@@ -621,10 +653,12 @@ const faqList = document.getElementById('faqList');
 const tabsCount = document.getElementById('tabsCount');
 let activeTab = FAQ_DATA[0].id;
 
+const VOC_DATA = JSON.parse(document.getElementById('vocDataJson').textContent || "[]");
+
 function renderTabs(){
   tabBar.innerHTML = FAQ_DATA.map(cat => `
     <button class="tab-btn ${cat.id===activeTab?'active':''}" data-id="${cat.id}">
-      ${cat.label} <span class="n">${cat.items.length}</span>
+      ${cat.label} <span class="n">${cat.isVoc ? VOC_DATA.length : cat.items.length}</span>
     </button>
   `).join('');
   tabBar.querySelectorAll('.tab-btn').forEach(btn=>{
@@ -654,7 +688,11 @@ function escapeHtmlText(s){
 
 function renderFaq(){
   const cat = FAQ_DATA.find(c=>c.id===activeTab);
-  tabsCount.textContent = `${FAQ_DATA.reduce((s,c)=> s + c.items.length, 0)}건 중 ${cat.items.length}건 표시`;
+  if(cat.isVoc){
+    renderVocList();
+    return;
+  }
+  tabsCount.textContent = `${FAQ_DATA.reduce((s,c)=> s + (c.isVoc ? VOC_DATA.length : c.items.length), 0)}건 중 ${cat.items.length}건 표시`;
   faqList.innerHTML = cat.items.map((item, idx)=>`
     <div class="faq-item" data-idx="${idx}">
       <div class="faq-q">
@@ -670,6 +708,63 @@ function renderFaq(){
       </div>
     </div>
   `).join('');
+  setupExclusiveAccordion(faqList);
+}
+
+let vocFilter = "";
+function renderVocList(){
+  const total = VOC_DATA.length;
+  const q = vocFilter.trim().toLowerCase();
+  const filtered = q
+    ? VOC_DATA.filter(r =>
+        r.id.includes(q) ||
+        r.site.toLowerCase().includes(q) ||
+        r.status.toLowerCase().includes(q) ||
+        r.content.toLowerCase().includes(q) ||
+        r.cause.toLowerCase().includes(q) ||
+        r.action.toLowerCase().includes(q) ||
+        r.result.toLowerCase().includes(q))
+    : VOC_DATA;
+
+  tabsCount.textContent = `${FAQ_DATA.reduce((s,c)=> s + (c.isVoc ? VOC_DATA.length : c.items.length), 0)}건 중 ${filtered.length}건 표시`;
+
+  const shown = filtered.slice(0, 60);
+
+  faqList.innerHTML = `
+    <div class="list-filter-bar">
+      <input type="text" id="vocFilterInput" placeholder="사이트, 키워드로 실제 VOC 사례 검색 (예: 펀치, 도면, RLP)" value="${vocFilter.replace(/"/g,'&quot;')}" />
+      <span class="list-filter-note">${filtered.length > 60 ? '상위 60건 표시 · 검색어를 좁혀보세요' : `총 ${total}건 · 최근 등록순 정렬`}</span>
+    </div>
+    <div class="faq-list" style="margin-top:12px;">
+    ${shown.map((r, idx) => `
+      <div class="faq-item" data-idx="${idx}">
+        <div class="faq-q">
+          <span class="mark">#${r.id}</span>
+          <span>${escapeHtmlText(r.content) || "(내용 없음)"}</span>
+          <span class="chev">▾</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <span class="tag">${escapeHtmlText(r.site) || "공통"}</span> <span class="tag" style="color:var(--text-dim); border-color:var(--line);">${escapeHtmlText(r.status) || "상태 미기재"}</span>
+            <div style="margin-top:12px;"><strong style="color:var(--cyan);">① VOC 내용</strong><div style="white-space:pre-wrap; margin-top:4px;">${escapeHtmlText(r.content) || "-"}</div></div>
+            <div style="margin-top:14px;"><strong style="color:var(--cyan);">② 발생 원인</strong><div style="white-space:pre-wrap; margin-top:4px;">${escapeHtmlText(r.cause) || "-"}</div></div>
+            <div style="margin-top:14px;"><strong style="color:var(--cyan);">③ 조치 방안</strong><div style="white-space:pre-wrap; margin-top:4px;">${escapeHtmlText(r.action) || "-"}</div></div>
+            <div style="margin-top:14px;"><strong style="color:var(--cyan);">④ 조치 결과</strong><div style="white-space:pre-wrap; margin-top:4px;">${escapeHtmlText(r.result) || "-"}</div></div>
+          </div>
+        </div>
+      </div>
+    `).join('')}
+    </div>
+  `;
+
+  const input = document.getElementById('vocFilterInput');
+  input.addEventListener('input', (e)=>{
+    vocFilter = e.target.value;
+    renderVocList();
+    const el = document.getElementById('vocFilterInput');
+    el.focus();
+    el.selectionStart = el.selectionEnd = el.value.length;
+  });
   setupExclusiveAccordion(faqList);
 }
 
@@ -715,6 +810,20 @@ function buildSearchCorpus(){
         kwLower: kw.join(' \u241f ').toLowerCase(), // joined with a separator that won't collide
         compact: normalizeCompact(item.q + ' ' + item.a + ' ' + kw.join(' '))
       });
+    });
+  });
+  VOC_DATA.forEach(r=>{
+    const body = `발생 원인\n${r.cause || '-'}\n\n조치 방안\n${r.action || '-'}\n\n조치 결과\n${r.result || '-'}`;
+    corpus.push({
+      type: 'voc',
+      category: '실제 VOC 사례',
+      tag: r.site || '공통',
+      title: `#${r.id} ${r.content}`,
+      body: body,
+      titleLower: (r.content || '').toLowerCase(),
+      bodyLower: body.toLowerCase(),
+      kwLower: '',
+      compact: normalizeCompact(r.content + ' ' + r.cause + ' ' + r.action + ' ' + r.result + ' ' + r.site + ' ' + r.id)
     });
   });
   return corpus;
@@ -828,6 +937,7 @@ document.getElementById('homeBtn').addEventListener('click', ()=>{
   searchInput.value = '';
   resultBox.classList.remove('show');
   resultBody.innerHTML = '';
+  vocFilter = '';
   activeTab = FAQ_DATA[0].id;
   renderTabs();
   renderFaq();
